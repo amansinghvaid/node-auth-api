@@ -1,13 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
+const Response = require('../util/response');
+const api1 = require('./api/v1/api');
 
-const api1 = require('./api/1.0/api');
-
-router.use('/api/1.0/', api1);
+router.use('/api/v1/', api1);
 
 router.use('/', (req, res, next) => {
-    res.send('Incorrect API request.');
+    return res.status(404).json(new Response(false, 'Incorrect API request.'));
 });
 
 module.exports = router;
